@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="debouncer.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        var divOutput, searchHandler, txtDelay, initSearchHandler;
+        
+        divOutput = $('#divOutput');
+        txtDelay = $('#txtDelay');
+        
+        initSearchHandler = function() {
+          var delay = parseInt(txtDelay.val(), 10);
+          delay = delay || 200;
+          txtDelay.val(delay.toString());
+
+          searchHandler = debounce(function() {
+            divOutput.append('searchHandler fired.<br/>');
+          }, delay);
+        }
+        
+        initSearchHandler();
+        $("#txtSearch").on('keyup', searchHandler);
+
+        $("#txtDelay").on('change', function() {
+          initSearchHandler();
+        });
+      });
+
+    </script>
+  </head>
+  <body>
+    <p>
+      <label for="txtDelay">Delay (ms):</label>
+    </p>
+    <p>
+      <input type="text" id="txtDelay" value="200"/>
+    </p>
+    <p>
+      <label for="txtSearch">Type here:</label>
+    </p>
+    <p>
+      <input type="text" id="txtSearch"/>
+    </p>
+    <p>
+      <div id="divOutput"/>
+    </p>
+  </body>
+</html>
