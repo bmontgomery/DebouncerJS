@@ -15,3 +15,9 @@ The `window` object's `resize` event fires very frequently in IE. This can cause
 	var debouncedWindowResize = debounce(windowResize, 200);
 
 	$(window).resize(debouncedWindowResize);
+
+or more concisely,
+
+	$(window).resize(debounce(function() {
+		/* processing here */
+	}, 200));
