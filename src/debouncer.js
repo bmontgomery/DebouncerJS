@@ -16,20 +16,18 @@ Debouncer = (function() {
     options.timeout = timeout;
   }
 
-  Debouncer.prototype.fireEvent = function(debounce) {
+  Debouncer.prototype.fireEvent = function() {
     clearTimeout(timeoutHandle);
-    if (debounce !== false) {
-      return timeoutHandle = setTimeout(options.callback, options.timeout);
-    } else {
-      return options.callback();
-    }
+    var args = arguments;
+    return timeoutHandle = setTimeout(function() { 
+      options.callback.apply(this, args);
+    }, options.timeout);
   };
 
   return Debouncer;
-
 })();
 
 debounce = function(callback, timeout) {
-    var debouncer = new Debouncer(callback, timeout);
-    return debouncer.fireEvent;
+  var debouncer = new Debouncer(callback, timeout);
+  return debouncer.fireEvent;
 };
