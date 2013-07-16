@@ -10,13 +10,7 @@ describe("Debouncer", function() {
       debounce(myFunction, 100)();
     });
 
-    expect(value).toBe(0);
-
     waitsFor(function() { return value === 1; }, "Value was never set to 1", 200);
-
-    runs(function() {
-      expect(value).toBe(1);    
-    });
   });
 
   it("debounces the function", function(){
@@ -38,15 +32,13 @@ describe("Debouncer", function() {
       debouncedFn();
       debouncedFn();
       debouncedFn();
-    });
 
-    expect(value).toBe(0);
+      // the value should still be 0 at this point (assuming this line is executed 
+      // less than 100ms after the last call to debouncedFn).
+      expect(value).toBe(0);
+    });
 
     waitsFor(function() { return value === 1; }, "Value was never set to 1", 200);
-
-    runs(function() {
-      expect(value).toBe(1);
-    });
   });
 
   it("passes parameters through", function() {
@@ -59,13 +51,7 @@ describe("Debouncer", function() {
       debounce(myFunction, 100)(1);
     });
 
-    expect(value).toBe(0);
-
     waitsFor(function() { return value === 1; }, "Value was never set to 1", 200);
-
-    runs(function() {
-      expect(value).toBe(1);    
-    });
   });
 
 });
