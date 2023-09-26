@@ -16,7 +16,7 @@ Debouncer = (function() {
     options.timeout = timeout;
   }
 
-  Debouncer.prototype.fireEvent = function() {
+  Debouncer.prototype.triggerEvent = function() {
     clearTimeout(timeoutHandle);
     var args = arguments;
     return timeoutHandle = setTimeout(function() { 
@@ -29,5 +29,5 @@ Debouncer = (function() {
 
 debounce = function(callback, timeout) {
   var debouncer = new Debouncer(callback, timeout);
-  return debouncer.fireEvent;
+  return debouncer.triggerEvent;
 };
