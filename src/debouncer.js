@@ -16,6 +16,10 @@ Debouncer = (function() {
     options.timeout = timeout;
   }
 
+  /*
+  This is the entry point for triggering the desired function, and will delay
+  calling the orginal callback for the set amount of time.
+  */
   Debouncer.prototype.triggerEvent = function() {
     clearTimeout(timeoutHandle);
     var args = arguments;
